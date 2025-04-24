@@ -14,7 +14,7 @@ class CollectionModel {
     return colecoes;
   }
 
-  // Obter um personagem pelo ID
+  // Obter um colecao pelo ID
   async findById(id) {
     const colecao = await prisma.collection.findUnique({
       where: {
@@ -28,7 +28,7 @@ class CollectionModel {
     return colecao;
   }
 
-  // Criar um novo personagem
+  // Criar uma nova coleção
   async create(
     name,
     description,
@@ -45,20 +45,20 @@ class CollectionModel {
     return newCollection;
   }
 
-  // Atualizar um personagem
+  // Atualizar uma coleção
   async update(
     id,
     name,
     description,
     releaseYear,
   ) {
-    const personagem = await this.findById(id);
+    const colecao = await this.findById(id);
 
-    if (!personagem) {
+    if (!colecao) {
       return null;
     }
 
-    // Atualize o personagem existente com os novos dados
+    // Atualize a coleção existente com os novos dados
     const data = {};
     if (name !== undefined) {
       data.name = name;
@@ -70,25 +70,25 @@ class CollectionModel {
       data.releaseYear = releaseYear;
     }
 
-    const personagemUpdated = await prisma.personagem.update({
+    const collectionUpdated = await prisma.collection.update({
       where: {
         id: Number(id),
       },
       data,
     });
 
-    return personagemUpdated;
+    return collectionUpdated;
   }
 
-  // Remover um personagem
+  // Remover uma coleção
   async delete(id) {
-    const personagem = await this.findById(id);
+    const colecao = await this.findById(id);
 
-    if (!personagem) {
+    if (!colecao) {
       return null;
     }
 
-    await prisma.personagem.delete({
+    await prisma.colecao.delete({
       where: {
         id: Number(id),
       },

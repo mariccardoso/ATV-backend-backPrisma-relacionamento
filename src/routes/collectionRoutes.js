@@ -14,9 +14,9 @@ collectionRouter.get("/:id", CollectionController.getCollectionsById);
 collectionRouter.post("/", CollectionController.createCollection);
 
 // PUT /colecoes/:id - Atualizar uma Coleção
-// collectionRouter.put("/:id", CollectionController.updatePersonagem);
+collectionRouter.put("/:id", CollectionController.updateCollection);
 
 // DELETE /colecoes/:id - Remover uma Coleção
-// collectionRouter.delete("/:id", CollectionController.deletePersonagem);
+collectionRouter.delete("/:id", CollectionController.deleteCollection);
 
 export default collectionRouter;

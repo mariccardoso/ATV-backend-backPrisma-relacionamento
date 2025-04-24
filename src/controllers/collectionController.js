@@ -40,7 +40,7 @@ class CollectionController {
         releaseYear
       } = req.body;
 
-      // Verifica se todos os campos do coleção foram fornecidos
+      // Verifica se todos os campos da coleção foram fornecidos
       if (
         !name ||
         !description ||
@@ -73,7 +73,7 @@ class CollectionController {
   }
 
   // PUT /api/colecoes/:id
-  async updatePersonagem(req, res) {
+  async updateCollection(req, res) {
     try {
       const { id } = req.params;
       const {
@@ -91,7 +91,7 @@ class CollectionController {
       );
 
       if (!updatedCollection) {
-        return res.status(404).json({ error: "Personagem não encontrado" });
+        return res.status(404).json({ error: "Coleção não encontrada" });
       }
 
       res.json(updatedCollection);

@@ -7,6 +7,15 @@ class CardModel {
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        collection: {
+          select: {
+            name: true,
+            description: true,
+            releaseYear: true,
+        }
+      }
+      },
     });
 
     console.log(cartas);
@@ -21,8 +30,14 @@ class CardModel {
         id: Number(id),
       },
       include: {
-        cards:true
+        collection: {
+          select: {
+            name: true,
+            description: true,
+            releaseYear: true,
+        }
       }
+    },
     });
 
     return carta;

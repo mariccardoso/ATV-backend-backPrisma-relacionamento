@@ -7,16 +7,16 @@ const collectionRouter = express.Router();
 // GET /colecoes - Listar todas as Coleções
 collectionRouter.get("/", CollectionController.getAllCollections);
 
-// GET /personagens/:id - Obter um Personagem pelo ID
-// personagensRouter.get("/:id", PersonagemController.getPersonagemById);
+// GET /colecoes/:id - Obter uma Coleção pelo ID
+collectionRouter.get("/:id", CollectionController.getCollectionsById);
 
-// POST /personagens - Criar um novo Personagem
-// personagensRouter.post("/", PersonagemController.createPersonagem);
+// POST /colecoes - Criar um nova Coleção
+collectionRouter.post("/", CollectionController.createCollection);
 
-// PUT /personagens/:id - Atualizar um Personagem
-// personagensRouter.put("/:id", PersonagemController.updatePersonagem);
+// PUT /colecoes/:id - Atualizar uma Coleção
+// collectionRouter.put("/:id", CollectionController.updatePersonagem);
 
-// DELETE /personagens/:id - Remover um Personagem
-// personagensRouter.delete("/:id", PersonagemController.deletePersonagem);
+// DELETE /colecoes/:id - Remover uma Coleção
+// collectionRouter.delete("/:id", CollectionController.deletePersonagem);
 
 export default collectionRouter;

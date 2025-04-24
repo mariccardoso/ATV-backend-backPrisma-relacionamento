@@ -16,53 +16,41 @@ class CollectionModel {
 
   // Obter um personagem pelo ID
   async findById(id) {
-    const personagem = await prisma.personagem.findUnique({
+    const colecao = await prisma.collection.findUnique({
       where: {
         id: Number(id),
       },
+      include: {
+        cards:true
+      }
     });
 
-    return personagem;
+    return colecao;
   }
 
   // Criar um novo personagem
   async create(
-    title,
+    name,
     description,
-    episodes,
-    releaseYear,
-    studio,
-    genres,
-    rating,
-    imageUrl
+    releaseYear
   ) {
-    const newPersonagem = await prisma.personagem.create({
+    const newCollection = await prisma.collection.create({
       data: {
-        title,
+        name,
         description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl,
+        releaseYear
       },
     });
 
-    return newPersonagem;
+    return newCollection;
   }
 
   // Atualizar um personagem
   async update(
     id,
-    title,
+    name,
     description,
-    episodes,
     releaseYear,
-    studio,
-    genres,
-    rating,
-    imageUrl
   ) {
     const personagem = await this.findById(id);
 
@@ -72,29 +60,14 @@ class CollectionModel {
 
     // Atualize o personagem existente com os novos dados
     const data = {};
-    if (title !== undefined) {
-      data.title = title;
+    if (name !== undefined) {
+      data.name = name;
     }
     if (description !== undefined) {
       data.description = description;
     }
-    if (episodes !== undefined) {
-      data.episodes = episodes;
-    }
     if (releaseYear !== undefined) {
       data.releaseYear = releaseYear;
-    }
-    if (studio !== undefined) {
-      data.studio = studio;
-    }
-    if (genres !== undefined) {
-      data.genres = genres;
-    }
-    if (rating !== undefined) {
-      data.rating = rating;
-    }
-    if (imageUrl !== undefined) {
-      data.imageUrl = imageUrl;
     }
 
     const personagemUpdated = await prisma.personagem.update({

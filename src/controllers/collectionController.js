@@ -12,124 +12,102 @@ class CollectionController {
     }
   }
 
-  // GET /api/personagens/:id
-  async getPersonagemById(req, res) {
+  // GET /api/colecoes/:id
+  async getCollectionsById(req, res) {
     try {
       const { id } = req.params;
 
-      const personagem = await PersonagemModel.findById(id);
+      const colecao = await CollectionModel.findById(id);
 
-      if (!personagem) {
-        return res.status(404).json({ error: "Personagem não encontrado" });
+      if (!colecao) {
+        return res.status(404).json({ error: "Coleção não encontrada" });
       }
 
-      res.json(personagem);
+      res.json(colecao);
     } catch (error) {
-      console.error("Erro ao buscar personagem:", error);
-      res.status(500).json({ error: "Erro ao buscar personagem" });
+      console.error("Erro ao buscar coleção:", error);
+      res.status(500).json({ error: "Erro ao buscar coleção" });
     }
   }
 
-  // POST /api/personagens
-  async createPersonagem(req, res) {
+  // POST /api/colecoes
+  async createCollection(req, res) {
     try {
       // Validação básica
       const {
-        title,
+        name,
         description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl,
+        releaseYear
       } = req.body;
 
-      // Verifica se todos os campos do personagem foram fornecidos
+      // Verifica se todos os campos do coleção foram fornecidos
       if (
-        !title ||
+        !name ||
         !description ||
-        !episodes ||
-        !releaseYear ||
-        !studio ||
-        !genres ||
-        !rating ||
-        !imageUrl
+        !releaseYear 
       ) {
         return res
           .status(400)
           .json({ error: "Todos os campos são obrigatórios" });
       }
 
-      // Criar o novo personagem
-      const newPersonagem = await PersonagemModel.create(
-        title,
+      // Criar o novo coleção
+      const newCollection = await CollectionModel.create(
+        name,
         description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl
+        releaseYear
       );
 
-      if (!newPersonagem) {
-        return res.status(400).json({ error: "Erro ao criar personagem" });
+      if (!newCollection) {
+        return res.status(400).json({ error: "Erro ao criar coleção" });
       }
 
-      res.status(201).json(newPersonagem);
+      res.status(201).json({
+        message: "Coleção criada com sucesso",
+        newCollection
+      });
     } catch (error) {
-      console.error("Erro ao criar personagem:", error);
-      res.status(500).json({ error: "Erro ao criar personagem" });
+      console.error("Erro ao criar coleção:", error);
+      res.status(500).json({ error: "Erro ao criar coleção" });
     }
   }
 
-  // PUT /api/personagens/:id
+  // PUT /api/colecoes/:id
   async updatePersonagem(req, res) {
     try {
       const { id } = req.params;
       const {
-        title,
+        name,
         description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl,
+        releaseYear
       } = req.body;
 
-      // Atualizar o personagem
-      const updatedPersonagem = await PersonagemModel.update(
+      // Atualizar o coleção
+      const updatedCollection = await CollectionModel.update(
         id,
-        title,
+        name,
         description,
-        episodes,
-        releaseYear,
-        studio,
-        genres,
-        rating,
-        imageUrl
+        releaseYear
       );
 
-      if (!updatedPersonagem) {
+      if (!updatedCollection) {
         return res.status(404).json({ error: "Personagem não encontrado" });
       }
 
-      res.json(updatedPersonagem);
+      res.json(updatedCollection);
     } catch (error) {
-      console.error("Erro ao atualizar personagem:", error);
-      res.status(500).json({ error: "Erro ao atualizar personagem" });
+      console.error("Erro ao atualizar coleção:", error);
+      res.status(500).json({ error: "Erro ao atualizar coleção" });
     }
   }
 
-  // DELETE /api/personagens/:id
-  async deletePersonagem(req, res) {
+  // DELETE /api/colecoes/:id
+  async deleteCollection(req, res) {
     try {
       const { id } = req.params;
 
-      // Remover o personagem
-      const result = await PersonagemModel.delete(id);
+      // Remover o coleção
+      const result = await CollectionModel.delete(id);
 
       if (!result) {
         return res.status(404).json({ error: "Personagem não encontrado" });
@@ -137,8 +115,8 @@ class CollectionController {
 
       res.status(204).end(); // Resposta sem conteúdo
     } catch (error) {
-      console.error("Erro ao remover personagem:", error);
-      res.status(500).json({ error: "Erro ao remover personagem" });
+      console.error("Erro ao remover coleção:", error);
+      res.status(500).json({ error: "Erro ao remover coleção" });
     }
   }
 }

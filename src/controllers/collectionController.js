@@ -34,18 +34,10 @@ class CollectionController {
   async createCollection(req, res) {
     try {
       // Validação básica
-      const {
-        name,
-        description,
-        releaseYear
-      } = req.body;
+      const { name, description, releaseYear } = req.body;
 
       // Verifica se todos os campos da coleção foram fornecidos
-      if (
-        !name ||
-        !description ||
-        !releaseYear 
-      ) {
+      if (!name || !description || !releaseYear) {
         return res
           .status(400)
           .json({ error: "Todos os campos são obrigatórios" });
@@ -64,7 +56,7 @@ class CollectionController {
 
       res.status(201).json({
         message: "Coleção criada com sucesso",
-        newCollection
+        newCollection,
       });
     } catch (error) {
       console.error("Erro ao criar coleção:", error);
@@ -76,11 +68,7 @@ class CollectionController {
   async updateCollection(req, res) {
     try {
       const { id } = req.params;
-      const {
-        name,
-        description,
-        releaseYear
-      } = req.body;
+      const { name, description, releaseYear } = req.body;
 
       // Atualizar o coleção
       const updatedCollection = await CollectionModel.update(
@@ -113,7 +101,7 @@ class CollectionController {
         return res.status(404).json({ error: "Personagem não encontrado" });
       }
 
-      res.status(204).end(); // Resposta sem conteúdo
+      res.status(204).json({ message: "Coleção removida com sucesso" }); // Resposta sem conteúdo
     } catch (error) {
       console.error("Erro ao remover coleção:", error);
       res.status(500).json({ error: "Erro ao remover coleção" });

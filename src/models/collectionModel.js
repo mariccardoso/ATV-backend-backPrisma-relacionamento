@@ -88,7 +88,7 @@ class CollectionModel {
       return null;
     }
 
-    await prisma.colecao.delete({
+    await prisma.collection.delete({
       where: {
         id: Number(id),
       },

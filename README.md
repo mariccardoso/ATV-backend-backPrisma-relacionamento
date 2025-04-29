@@ -75,6 +75,8 @@ Crie um arquivo `.env` na raiz do projeto:
 
 ```
 PORT=4000
+
+DATABASE_URL="file:./banco_relacionamento.db"
 ```
 
 ### Passo 6: Criar o servidor Express

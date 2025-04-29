@@ -49,7 +49,7 @@ class AuthController {
             });
         } catch (error) { 
             console.error("Erro ao registrar usuário:", error);
-            return res.status(500).json({ message: "Erro ao registrar usuário." });
+            return res.status(500).json({ message: "Erro ao registrar usuário." }); 
         }
     }
 }
